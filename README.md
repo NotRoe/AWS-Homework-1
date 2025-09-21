@@ -1,70 +1,60 @@
-# AWS-Homework-1
-AWS
+Readme instructions on how to configure the EC2 with teardown instructions
+**************************************************************************
 
 Sign in to the AWS Console
-Select your region
-Go to the Dashboard and select EC2
-Create Security Group
+Select your region (On header next to Account ID and User Name)
 
-Select the security group on the left side
-Click "Create Security Group"
-Enter name and description (Usually they are the same)
-Verify VPC is set to the default
-Add inbound HTTP TCP 80 IPv4 anywhere (0.0.0.0/0)
-Add inbound SSH TCH 22 ipvd anywhere (0.0.0.0/0)
-DO NOT TOUCH OUTBOUND RULES - Verify it says "All traffic" is allowed
-(Optional: Add tags)
-CLICK "CREATE SECURITY GROUP"
-VERIFY YOUR SECURITY GROUP IS CREATED AND CORRECTLY CONFIGURED IN THE CONSULE
 
-GRAB YOUR STARTUP SCRIP
+To Create Security Group
+1. From the Dashboard and select EC2
+2. On the left side command column, under "Network & Security" Select "Security Groups"
+3. Click the orange "Create Security Group"
+4. Enter Security group name (no spaces) and description (Usually they are the same)
+5. Verify VPC is set to the default
+6. Inbound rules
+a. Add inbound rule: HTTP, TCP, 80, Anywhere-IPv4, 0.0.0.0/0 (Description is optional)
+b. Add inbound rule: SSH, TCP, 22, Anywhere-IPv4, 0.0.0.0/0 (Description is optional)
+7. Outbound rules (DO NOT TOUCH OUTBOUND RULES, should default as "All traffic")
+8. Click the orange "Create Security Group"
 
-Choose from the available start-up scripts in the class (anyone's will work)
-Copy the script from GitHub
-LAUNCHING EC2 INSTANCE
+To create an EC2 instance
+1. From the Dashboard and select EC2
+2. On the left side command column, under "Instances" Select "Instances"
+3. Click the orange "Launch Instance"
+4. Enter name (no spaces) and Add additional tags (optional)
+5. under "Application and OS Images (Amazon Machine Image)" Amazon Linux, 64-bit x86 (default); can collapse section
+6. under "Instance type" Amazon Linux, t3.micro (default); can collapse section
+7. under "Key pair (login)" select existing key pair or click "Create new key pair" to Create new key pair; can collapse section
+	Creating new key pair
+	a. Enter Key pair name (no spaces)
+	b. Key pair type: RSA (default), Private key file format: .pem (default)
+	c. Click the orange "Create key pair"
+	d. Allow new key pair to download to your local computer
+8. under "Network settings" sub heading "Firewall (security groups)" choose "Select existing security group" 
+a. "Common security groups" select a security group (DO NOT select default, it looks lazy); can collapse section
+9. ignore "Configure storage" (for now); can collapse section
+A. under "Network settings" click carrot to open sub headings
+a. scroll to sub heading "User data - optional" and paste start up script
+	Start up Scripts
+	a. Copy the script from GitHub or choose from the available start-up scripts in the class
+B. Click the orange "Launch Instance"
 
-In the left column, click on instance
-Click "Launch Instance"
-CREATING INSTANCE
+To test the Instance
+1. From the Dashboard and select EC2
+2. On the left side command column, under "Instances" Select "Instances"
+3. WAIT for initialization to complete (can obsessively hit refresh)
+a. Under column "Instance state" should be a green check and "running" 
+b. Under column "Status Check" should be green "checks passed".
+4. Under column "Instance ID" click blue Instance ID
+5. Copy the PUBLIC DNS
+6. Open a new browser tab TYPE "http://" Then paste the copied Public DNS Address, hit ENTER
 
-Enter the instance name and add relevant tags if desired
-AMI Selection: Review menu, ensure defaults are selected, collapse
-Instance Type: Review the instance type menu, select the proper sizing, and  collapse
-Key Pair: select "Proceed without key pair", Collapse (IN MOST CASES YOU WILL NEED TO GENERATE A NEW KEY PAIR)
-NETWORK SETTING
-
-Don't click "Edit"
-Verify VPC selection
-Note: Subnet selection is not critical for this lab
-Make sure "Autho-assign public IP" is enabled
-Select your created Security Group (NOT "launch-wizard")
-Collapse Section
-STORAGE CONFIGURATION
-
-Review storage menu
-Collapse section
-ADVANCED SETTINGS
-
-Open advanced settings
-Focus on the User Data section only - ignore everything else
-Paste your chosen startup script
-LAUNCH
-
-Review configuration
-Click "Launch Instance"
-TEST THE WEB SERVER
-
-Wait for the instance to pass status checks
-Copy the instances PUBLIC DNS ADDRESS
-Open a browser
-Use: TYPE http:// Then paste the Public DNS Address behind it
-TEARDOWN TERMINATE THE EC2 INSTANCE
-
-Go to the EC2 Instance
-Select your instance
-Click the drop-down and click TERMINATE INSTANCE
-DELETE THE SECURITY GROUP (Optional)
-
-Go to EC2 --- Security Groups
-Select your security group you want to delete
-Actions -- Delete Security Group Note: The security group can only be deleted after the instance is terminated
+To Teardown/terminate an EC2 instance
+1. From the Dashboard and select EC2
+2. On the left side command column, under "Instances" Select "Instances"
+3. Select the instance(s) that will be terminated
+4. Click the "Instance state" button drop-down and click "Terminate (delete) instance"
+5. Terminate (delete) instance pop-up will open, click "Terminate (delete)"
+6. Wait to confirm, Under column "Instance state" should be a grey minus and "Terminated" 
+**************************************************************************
+END
