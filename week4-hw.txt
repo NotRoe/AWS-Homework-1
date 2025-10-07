@@ -1,0 +1,17 @@
+Network architecture
+
+Region Oregon us-west-2 	(4) four Availability Zones (AZs)
+
+10.14.0.0/16
+
+10.14.1.0/24	= 	public room a
+10.14.2.0/24	= 	public room b
+10.14.3.0/24	= 	public room c
+
+10.14.11.0/24	= 	private room a
+10.14.12.0/24	= 	private room b
+10.14.13.0/24	= 	private room c
+
+10.14.21.0/24	= 	private room a
+10.14.22.0/24	= 	private room b
+10.14.23.0/24	= 	private room c
